@@ -22,7 +22,7 @@ Added to line 16:
 Before  - 
 After   - < body style="background-color: #E6E6FA;" >
 
-Changed line 19 ~ 22
+Changed line 19-22
 Before  - < h1 >Shop< /h1 >
 After   - < h1 class="text-center"> The Potion Parlour < /h1>
           < style> h1, h2 { font-family: 'Shadows Into Light', cursive; } < /style>
@@ -43,7 +43,42 @@ After   - < a th:href="@{/showFormAddProduct}" class="btn btn-secondary btn-sm m
 
 <b>Part D:</b> 
 <pre>
-Test test 123
+Created - about.html
+
+    < !DOCTYPE html>
+    < html lang="en">
+    < head>
+        < meta charset="UTF-8">
+        < title>About Us< /title>
+    < /head>
+    < body style="background-color: #E6E6FA;">
+    < style>
+        h1 {font-family: 'Shadows Into Light', cursive;}
+    < /style>
+        < h1 class="text-center" style="text-align: center;"> About Us < /h1>
+    
+        < p class="text-center" style="text-align: center; font-size: 20px;">
+            Welcome to the Potion Parlour, where magic bubbles in every vial and wonder awaits around every corner. <br>
+            We source the rarest ingredients and craft unique elixirs to fulfill your wishes, (or at least) make your day a little brighter!
+        < /p>
+    
+    < a href="http://localhost:8080/"> Back to Main Screen< /a>
+    < /body>
+    < /html>
+
+
+Added to line 23-25, mainscreen.html
+Before  - 
+After   -   < div style="text-align: center;">
+            < a th:href="@{about}">About Us< /a>
+            < /div>
+
+Added to line 55-58, MainScreenControllerr.java
+Before  -
+After   -   @GetMapping("/about")
+            public String about() {
+            return "about"; // about.html page reference
+            }
 </pre>
 
 <b>Part E:</b>
