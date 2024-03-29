@@ -83,7 +83,7 @@ Added to line 55-58, MainScreenControllerr.java
 Before  -
 After   -   @GetMapping("/about")
             public String about() {
-            return "about"; // about.html page reference
+            return "about"; 
             }
 </pre>
 
@@ -140,6 +140,80 @@ if (productRepository.count() == 0) {
 </pre>
 
 <b>Part F:</b>
+<pre>
+Created - successPurchase.html
+    < !DOCTYPE html>
+    < html lang="en">
+    < head>
+        < meta charset="UTF-8">
+        < title>Purchase Success< /title>
+    < /head>
+    < body style="background-color: #E6E6FA;">
+    < style>
+        h1 {font-family: 'Shadows Into Light', cursive;}
+    < /style>
+    < h1 class="text-center" style="text-align: center;"> Purchase Success! < /h1>
+    
+    < p class="text-center" style="text-align: center; font-size: 20px;">
+        Your purchase was successful! Thank you for shopping at the Potion Parlour!
+        Click the link below to return to the main page.
+    < /p>
+    
+    < a href="http://localhost:8080/"> Back to Main Screen< /a>
+    < /body>
+    < /html>
+
+
+Created - failPurchase.html
+    < !DOCTYPE html>
+    < html lang="en">
+    < head>
+        < meta charset="UTF-8">
+        < title>Purchase Failed< /title>
+    < /head>
+    < body style="background-color: #E6E6FA;">
+    < style>
+        h1 {font-family: 'Shadows Into Light', cursive;}
+    < /style>
+    < h1 class="text-center" style="text-align: center;"> Something went wrong... < /h1>
+    
+    < p class="text-center" style="text-align: center; font-size: 20px;">
+        Something went wrong with your purchase. Please go back to the main page and try again.
+    < /p>
+    
+    < a href="http://localhost:8080/"> Back to Main Screen< /a>
+    < /body>
+    < /html>
+
+
+Added to line 107-114, Product.java
+Before  - 
+After   -  public boolean buyNow() {
+            if (this.inv >= 1) {
+                this.inv--;
+                return true;
+            } else {
+                return false;
+                }
+            }
+
+Added to line 176-188, AddProductController.java
+Before  -
+After   - @GetMapping("/buyNow")
+            public String buyNow(@RequestParam("productID") int theId, Model theModel) {
+                ProductService productService = context.getBean(ProductServiceImpl.class);
+                Product buyProduct = productService.findById(theId);
+        
+                boolean purchaseConfirmation = buyProduct.buyNow();
+                if (purchaseConfirmation) {
+                    productService.save(buyProduct);
+                    return "successPurchase";
+                } else {
+                    return "failPurchase";
+                }
+            }
+
+< /pre>
 
 <b>Part G:</b>
 

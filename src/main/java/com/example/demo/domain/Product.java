@@ -104,4 +104,12 @@ public class Product implements Serializable {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+    public boolean buyNow() {
+        if (this.inv >= 1) {
+            this.inv--;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
