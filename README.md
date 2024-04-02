@@ -17,37 +17,36 @@ STUDENTS FOR SPECIFICS. ** </strong>
 Create a README file that includes notes describing where in the code to find the changes you made for each of parts C
 to J. Each note should include the prompt, file name, line number, and change.
 
-<b>Part C:</b>
+## <b>Part C:</b>
 <pre>
-mainscreen.html
-Changed line 14: 
+Modified mainscreen.html
+line 14: 
 Before - < title > My Bicycle Shop < /title >
 After  - < title > The Potion Parlour < /title >
 
-Added to line 16:
-Before  - 
-After   - < body style="background-color: #E6E6FA;" >
+line 16:
+          < body style="background-color: #E6E6FA;" >
 
-Changed line 19-22
+line 19-22:
 Before  - < h1 >Shop< /h1 >
 After   - < h1 class="text-center"> The Potion Parlour < /h1>
           < style> h1, h2 { font-family: 'Shadows Into Light', cursive; } < /style>
 
-Changed line 33
+line 33:
 Before  - < a th:href="@{/showFormAddInPart}" class="btn btn-primary btn-sm mb-3">Add Inhouse Part < /a>
 After   - < a th:href="@{/showFormAddInPart}" class="btn btn-secondary btn-sm mb-3">Add Inhouse Part< /a>
 
-Changed line 34
+line 34: 
 Before  - < a th:href="@{/showFormAddOutPart}" class="btn btn-primary btn-sm mb-3">Add Outsourced Part< /a>
 After   - < a th:href="@{/showFormAddOutPart}" class="btn btn-secondary btn-sm mb-3">Add Outsourced Part< /a>
 
-Changed line 70
+line 70:
 Before  - < a th:href="@{/showFormAddProduct}" class="btn btn-primary btn-sm mb-3">Add Product< /a>
 After   - < a th:href="@{/showFormAddProduct}" class="btn btn-secondary btn-sm mb-3">Add Product< /a>
 </pre>
 
 
-<b>Part D:</b>
+## <b>Part D:</b>
 <pre>
 Created - about.html
 
@@ -72,24 +71,24 @@ Created - about.html
     < /body>
     < /html>
 
-
-Added to line 23-25, mainscreen.html
-Before  - 
-After   -   < div style="text-align: center;">
+Modified mainscreen.html
+line 23-25: 
+            < div style="text-align: center;">
             < a th:href="@{about}">About Us< /a>
             < /div>
 
-Added to line 55-58, MainScreenControllerr.java
-Before  -
-After   -   @GetMapping("/about")
+Modified MainScreenControllerr.java
+line 55-58: 
+            @GetMapping("/about")
             public String about() {
             return "about"; 
             }
 </pre>
 
-<b>Part E:</b>
+## <b>Part E:</b>
 <pre>
-Added to line 77-122, BootStrapData.java
+Modified BootStrapData.java
+line 77-122:
 
  if (partRepository.count() == 0) {
     InhousePart vial = new InhousePart();
@@ -139,7 +138,7 @@ if (productRepository.count() == 0) {
     }
 </pre>
 
-<b>Part F:</b>
+## <b>Part F:</b>
 <pre>
 Created - successPurchase.html
     < !DOCTYPE html>
@@ -185,10 +184,9 @@ Created - failPurchase.html
     < /body>
     < /html>
 
-
-Added to line 107-114, Product.java
-Before  - 
-After   -  public boolean buyNow() {
+Modified Product.java
+line 107-114: 
+            public boolean buyNow() {
             if (this.inv >= 1) {
                 this.inv--;
                 return true;
@@ -197,9 +195,9 @@ After   -  public boolean buyNow() {
                 }
             }
 
-Added to line 176-188, AddProductController.java
-Before  -
-After   - @GetMapping("/buyNow")
+Modified AddProductController.java
+line 176-188: 
+            @GetMapping("/buyNow")
             public String buyNow(@RequestParam("productID") int theId, Model theModel) {
                 ProductService productService = context.getBean(ProductServiceImpl.class);
                 Product buyProduct = productService.findById(theId);
@@ -214,7 +212,7 @@ After   - @GetMapping("/buyNow")
             }
 </pre>
 
-<b>Part G:
+## <b>Part G:
 Modify the parts to track maximum and minimum inventory by doing the following: </b>
 
 
@@ -223,15 +221,12 @@ Modify the parts to track maximum and minimum inventory by doing the following: 
 - Set thymeleaf attribute to populate the data 
 <pre>
 Modified mainscreen.html
-
 line 44-45
-Before  -
-After   -   < th>Minimum< /th>
+            < th>Minimum< /th>
             < th>Maximum< /th>
 
 line 54-54
-Before  -
-After   -   < td th:text="${tempPart.minimum}">1< /td>
+            < td th:text="${tempPart.minimum}">1< /td>
             < td th:text="${tempPart.maximum}">1< /td>
 </pre>
 
@@ -239,9 +234,8 @@ After   -   < td th:text="${tempPart.minimum}">1< /td>
 - Defined minimum and maximum inventory fields with validation for minimum value with a message
 <pre>
 Modified Part.java
-line 31-33
-Before  - 
-After   - @Min(value = 0, message = "Minimum inventory must be more than zero")
+line 31-33:
+        @Min(value = 0, message = "Minimum inventory must be more than zero")
             int minimum;
             int maximum;
 </pre>
@@ -249,9 +243,8 @@ After   - @Min(value = 0, message = "Minimum inventory must be more than zero")
 - Created getters and setters for minimum and maximum inventory
 <pre>
 Modified Part.java
-line 108-114
-Before  -
-After   -   public void setMinimum(int minimum) { this.minimum = minimum; }
+line 108-114:
+            public void setMinimum(int minimum) { this.minimum = minimum; }
 
             public int getMinimum() { return this.minimum; }
 
@@ -263,29 +256,24 @@ After   -   public void setMinimum(int minimum) { this.minimum = minimum; }
 - Set default values for minimum and maximum inventory in constructors
 <pre>
 Modified Part.java
-line 47-48
-Before  - 
-After   -   this.minimum = 0;
+line 47-48:
+            this.minimum = 0;
             this.maximum = 100;
-line 56-57
-Before  - 
-After   -   this.minimum = 0;
+
+line 56-57:
+            this.minimum = 0;
             this.maximum = 100;
 
 Modified InhousePart.java
-line 18-19
-Before  -   public InhousePart() {
-        }
-After   -   public InhousePart() {
+line 18-19:
+        public InhousePart() {
             this.minimum = 0;
             this.maximum = 100;
         }
 
 Modified OutsourcedPart.java
-line 18-19
-Before  -   public OutsourcedPart() {
-        }
-After   -   public OutsourcedPart() {
+line 18-19:
+        public OutsourcedPart() {
             this.minimum = 0;
             this.maximum = 100;
         }
@@ -295,7 +283,7 @@ After   -   public OutsourcedPart() {
 - Added styling, font, input fields for minimum/maximum inventory, and error handling
 <pre>
 Modified InhousePartForm.html
-line 9-13
+line 9-13:
 Before  -   < body>
             < h1>Inhouse Part Detail< /h1>
 After   -   < body style="background-color: #E6E6FA;">
@@ -304,22 +292,20 @@ After   -   < body style="background-color: #E6E6FA;">
                 h1 {font-family: 'Shadows Into Light', cursive;}
             < /style>
 
-line 27-30
-Before  -
-After   -   < p>< input type="text" th:field="*{minimum}" placeholder="Minimum" class="form-control mb-4 col-4">< /p>
+line 27-30:
+            < p>< input type="text" th:field="*{minimum}" placeholder="Minimum" class="form-control mb-4 col-4">< /p>
 
-            < p>< input type="text" th:field="*{maximum}" placeholder="Minimum" class="form-control mb-4 col-4">< /p>
+            < p>< input type="text" th:field="*{maximum}" placeholder="Maximum" class="form-control mb-4 col-4">< /p>
 
-line 33-38
-Before  -
-After   -   < p>
+line 33-38:
+            < p>
             < div th:if="${#fields.hasAnyErrors()}">
                 < ul>< li th:each="err: ${#fields.allErrors()}" th:text="${err}">< /li>< /ul>
             < /div>
             < /p>
 
 Modified OutsourcedPartForm.html
-line 9-13
+line 9-13:
 Before  -   < body>
             < h1>Outsourced Part Detail< /h1>
 After   -   < body style="background-color: #E6E6FA;">
@@ -328,17 +314,15 @@ After   -   < body style="background-color: #E6E6FA;">
                 h1 {font-family: 'Shadows Into Light', cursive;}
             < /style>
 
-line 27-32
-Before  -
-After   -   < p>< input type="text" th:field="*{minimum}" placeholder="Minimum" class="form-control mb-4 col-4">< /p>
+line 27-32:
+            < p>< input type="text" th:field="*{minimum}" placeholder="Minimum" class="form-control mb-4 col-4">< /p>
                 < p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error< /p>
     
-            < p>< input type="text" th:field="*{maximum}" placeholder="Minimum" class="form-control mb-4 col-4">< /p>
+            < p>< input type="text" th:field="*{maximum}" placeholder="Maximum" class="form-control mb-4 col-4">< /p>
                 < p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error< /p>
 
-line 35-40
-Before  -
-After   -   < p>
+line 35-40:
+            < p>
             < div th:if="${#fields.hasAnyErrors()}">
                 < ul>< li th:each="err: ${#fields.allErrors()}" th:text="${err}">< /li>< /ul>
             < /div>
@@ -348,8 +332,8 @@ After   -   < p>
 <b>Rename the file the persistent storage is saved to.</b>
 - Renamed the database file  
 <pre>
-application.properties
-line 6
+Modified application.properties
+line 6:
 Before  -   spring.datasource.url=jdbc:h2:file:~/spring-boot-h2-db102  
 After   -   spring.datasource.url=jdbc:h2:file:~/src/main/resources/spring-boot-h2-db102-sumika
 </pre>
@@ -359,9 +343,8 @@ After   -   spring.datasource.url=jdbc:h2:file:~/src/main/resources/spring-boot-
     - Enforces valid inventory levels by adjusting inventory to the minimum or maximum value if it falls outside the allowed range.
 <pre>
 Modified Part.java
-line 100-106
-Before  -   
-After   -   public void validationLimit() {
+line 100-106:
+            public void validationLimit() {
                 if (this.inv < this.minimum) {
                     this.inv = this.minimum;
                 } else if (this.inv > this.maximum) {
@@ -373,25 +356,140 @@ After   -   public void validationLimit() {
 - Implemented inventory validation using validationLimit() in both InhousePartServiceImpl and OutsourcedPartServiceImpl to guarantee valid data
 <pre>
 Modified InhousePartServiceImpl.java
-line 54
-Before  -   public void save(InhousePart thePart) {
-            partRepository.save(thePart); 
-After   -   public void save(InhousePart thePart) {
+line 54 :
+            public void save(InhousePart thePart) {
             thePart.validationLimit();
             partRepository.save(thePart);
 
 Modified OutsourcedPartServiceImpl.java
-line 52 
-Before  -   public void save(OutsourcedPart thePart) {
-            partRepository.save(thePart); 
-After   -   public void save(OutsourcedPart thePart) {
+line 52:  
+            public void save(OutsourcedPart thePart) {
             thePart.validationLimit();
             partRepository.save(thePart);
 </pre>
 
-<b>Part H:</b>
-Before  -   
-After   -   
+## <b>Part H: 
+Add validation for between or at the maximum and minimum fields. The validation must include the following:</b>
+
+<b>- Display error messages for low inventory when adding and updating parts if the inventory is less than the minimum number of parts.</b>
+
+<pre>
+Modified Part.java
+line 4-5:
+import com.example.demo.validators.ValidPartInventory;
+import com.example.demo.validators.ValidPartInventoryMinimum;
+
+line 24-25:
+@ValidPartInventory 
+@ValidPartInventoryMinimum
+</pre>
+
+<pre>
+Created PartMinimumValidator.java 
+
+package com.example.demo.validators;
+
+import com.example.demo.domain.Part;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class PartMinimumValidator implements ConstraintValidator< ValidPartInventoryMinimum, Part> {
+    @Autowired
+    private ApplicationContext context;
+
+    public static ApplicationContext myContext;
+
+    @Override
+    public void initialize(ValidPartInventoryMinimum constraintAnnotation) {
+        ConstraintValidator.super.initialize(constraintAnnotation);
+    }
+
+    @Override
+    public boolean isValid(Part part, ConstraintValidatorContext constraintValidatorContext) {
+        return part.getInv() > part.getMinimum();
+    }
+}
+</pre>
+
+<pre>
+Created ValidPartInventoryMinimum
+
+package com.example.demo.validators;
+
+import javax.validation.Constraint;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Constraint(validatedBy = {PartMinimumValidator.class})
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ValidPartInventoryMinimum {
+    String message() default "Inventory cannot be lower than required minimum";
+    Class [] groups() default {};
+    Class [] payload() default  {};
+}
+</pre>
+<b>- Display error messages for low inventory when adding and updating products lowers the part inventory below the minimum.</b>
+<pre>
+No additional validation created here. The requirements in the previous step (step F), ensures inventory cannot fall below the minimum during adding or updating parts.
+</pre>
+<b>- Display error messages when adding and updating parts if the inventory is greater than the maximum.</b>
+
+<pre>
+Created PartInventoryValidator.java
+ 
+package com.example.demo.validators;
+
+import com.example.demo.domain.Part;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class PartInventoryValidator implements ConstraintValidator< ValidPartInventory, Part> {
+    @Autowired
+    private ApplicationContext context;
+
+    public static ApplicationContext myContext;
+
+    @Override
+    public void initialize(ValidPartInventory constraintAnnotation) {
+        ConstraintValidator.super.initialize(constraintAnnotation);
+    }
+
+    @Override
+    public boolean isValid(Part part, ConstraintValidatorContext constraintValidatorContext) {
+        return part.getInv() <= part.getMaximum();
+    }
+}
+</pre>
+
+<pre>
+Created ValidPartInventory.java
+ 
+package com.example.demo.validators;
+
+import javax.validation.Constraint;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Constraint(validatedBy = {PartInventoryValidator.class})
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ValidPartInventory {
+    String message() default "Inventory cannot exceed maximum value";
+    Class [] groups() default {};
+    Class [] payload() default {};
+}
+</pre>
+ 
 <b>Part I:</b>
 
 <b>Part J:</b>
