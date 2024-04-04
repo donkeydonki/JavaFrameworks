@@ -17,7 +17,8 @@ STUDENTS FOR SPECIFICS. ** </strong>
 Create a README file that includes notes describing where in the code to find the changes you made for each of parts C
 to J. Each note should include the prompt, file name, line number, and change.
 
-## <b>Part C:</b>
+## <b>Part C:
+Customize the HTML user interface for your customer’s application. The user interface should include the shop name, the product names, and the names of the parts. </b>
 <pre>
 Modified mainscreen.html
 line 14: 
@@ -46,7 +47,8 @@ After   - < a th:href="@{/showFormAddProduct}" class="btn btn-secondary btn-sm m
 </pre>
 
 
-## <b>Part D:</b>
+## <b>Part D:
+Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen. </b>
 <pre>
 Created - about.html
 
@@ -85,7 +87,8 @@ line 55-58:
             }
 </pre>
 
-## <b>Part E:</b>
+## <b>Part E:
+Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.</b>
 <pre>
 Modified BootStrapData.java
 line 77-122:
@@ -138,7 +141,11 @@ if (productRepository.count() == 0) {
     }
 </pre>
 
-## <b>Part F:</b>
+## <b>Part F:
+Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:
+- The “Buy Now” button must be next to the buttons that update and delete products.
+- The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.
+- Display a message that indicates the success or failure of a purchase.</b>
 <pre>
 Created - successPurchase.html
     < !DOCTYPE html>
@@ -161,8 +168,9 @@ Created - successPurchase.html
     < a href="http://localhost:8080/"> Back to Main Screen< /a>
     < /body>
     < /html>
+</pre>
 
-
+<pre>
 Created - failPurchase.html
     < !DOCTYPE html>
     < html lang="en">
@@ -183,7 +191,9 @@ Created - failPurchase.html
     < a href="http://localhost:8080/"> Back to Main Screen< /a>
     < /body>
     < /html>
+</pre>
 
+<pre>
 Modified Product.java
 line 107-114: 
             public boolean buyNow() {
@@ -194,7 +204,9 @@ line 107-114:
                 return false;
                 }
             }
+</pre>
 
+<pre>
 Modified AddProductController.java
 line 176-188: 
             @GetMapping("/buyNow")
@@ -213,12 +225,10 @@ line 176-188:
 </pre>
 
 ## <b>Part G:
-Modify the parts to track maximum and minimum inventory by doing the following: </b>
+Modify the parts to track maximum and minimum inventory by doing the following:
 
+- Add additional fields to the part entity for maximum and minimum inventory.</b>
 
-<b>Add additional fields to the part entity for maximum and minimum inventory.</b>
-- Created columns to the part table for minimum and maximum inventory 
-- Set thymeleaf attribute to populate the data 
 <pre>
 Modified mainscreen.html
 line 44-45
@@ -230,18 +240,15 @@ line 54-54
             < td th:text="${tempPart.maximum}">1< /td>
 </pre>
 
-<b>Modify the sample inventory to include the maximum and minimum fields.</b>
-- Defined minimum and maximum inventory fields with validation for minimum value with a message
+- <b> Modify the sample inventory to include the maximum and minimum fields.</b>
 <pre>
 Modified Part.java
 line 31-33:
         @Min(value = 0, message = "Minimum inventory must be more than zero")
             int minimum;
             int maximum;
-</pre>
 
-- Created getters and setters for minimum and maximum inventory
-<pre>
+
 Modified Part.java
 line 108-114:
             public void setMinimum(int minimum) { this.minimum = minimum; }
@@ -251,10 +258,8 @@ line 108-114:
             public void setMaximum(int maximum) { this.maximum = maximum; }
 
             public int getMaximum() { return this.maximum; }
-</pre>
 
-- Set default values for minimum and maximum inventory in constructors
-<pre>
+
 Modified Part.java
 line 47-48:
             this.minimum = 0;
@@ -279,8 +284,8 @@ line 18-19:
         }
 </pre>
 
-<b>Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs for the inventory so the user can set the maximum and minimum values.</b>
-- Added styling, font, input fields for minimum/maximum inventory, and error handling
+- <b>Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs for the inventory so the user can set the maximum and minimum values.</b>
+
 <pre>
 Modified InhousePartForm.html
 line 9-13:
@@ -329,8 +334,7 @@ line 35-40:
             < /p>
 </pre>
 
-<b>Rename the file the persistent storage is saved to.</b>
-- Renamed the database file  
+- <b>Rename the file the persistent storage is saved to.</b>
 <pre>
 Modified application.properties
 line 6:
@@ -338,9 +342,7 @@ Before  -   spring.datasource.url=jdbc:h2:file:~/spring-boot-h2-db102
 After   -   spring.datasource.url=jdbc:h2:file:~/src/main/resources/spring-boot-h2-db102-sumika
 </pre>
 
-<b>Modify the code to enforce that the inventory is between or at the minimum and maximum value.</b>
-- Created validationLimit() method  
-    - Enforces valid inventory levels by adjusting inventory to the minimum or maximum value if it falls outside the allowed range.
+- <b>Modify the code to enforce that the inventory is between or at the minimum and maximum value.</b>
 <pre>
 Modified Part.java
 line 100-106:
@@ -351,15 +353,14 @@ line 100-106:
                     this.inv = this.maximum;
                 }
             }
-</pre>
 
-- Implemented inventory validation using validationLimit() in both InhousePartServiceImpl and OutsourcedPartServiceImpl to guarantee valid data
-<pre>
+
 Modified InhousePartServiceImpl.java
 line 54 :
             public void save(InhousePart thePart) {
             thePart.validationLimit();
             partRepository.save(thePart);
+
 
 Modified OutsourcedPartServiceImpl.java
 line 52:  
@@ -371,7 +372,7 @@ line 52:
 ## <b>Part H: 
 Add validation for between or at the maximum and minimum fields. The validation must include the following:</b>
 
-<b>- Display error messages for low inventory when adding and updating parts if the inventory is less than the minimum number of parts.</b>
+- <b>Display error messages for low inventory when adding and updating parts if the inventory is less than the minimum number of parts.</b>
 
 <pre>
 Modified Part.java
@@ -411,9 +412,7 @@ public class PartMinimumValidator implements ConstraintValidator< ValidPartInven
         return part.getInv() > part.getMinimum();
     }
 }
-</pre>
 
-<pre>
 Created ValidPartInventoryMinimum
 
 package com.example.demo.validators;
@@ -467,9 +466,8 @@ public class PartInventoryValidator implements ConstraintValidator< ValidPartInv
         return part.getInv() <= part.getMaximum();
     }
 }
-</pre>
 
-<pre>
+
 Created ValidPartInventory.java
  
 package com.example.demo.validators;
@@ -489,7 +487,29 @@ public @interface ValidPartInventory {
     Class [] payload() default {};
 }
 </pre>
- 
-<b>Part I:</b>
+
+## <b>Part I:
+Add at least _two_ unit tests for the maximum and minimum fields to the PartTest class in the test package.</b>
+<pre>
+Modified PartTest.java
+line 160-176:
+@Test
+    void getMinimum() {
+        int minimum = 5;
+        partIn.setMinimum(minimum);
+        assertEquals(minimum, partIn.getMinimum());
+        partOut.setMinimum(minimum);
+        assertEquals(minimum, partOut.getMinimum());
+    }
+
+    @Test
+    void getMaximum() {
+        int maximum = 5;
+        partIn.setMaximum(maximum);
+        assertEquals(maximum, partIn.getMaximum());
+        partOut.setMaximum(maximum);
+        assertEquals(maximum, partOut.getMaximum());
+    }
+</pre>
 
 <b>Part J:</b>
