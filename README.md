@@ -269,12 +269,14 @@ line 56-57:
             this.minimum = 0;
             this.maximum = 100;
 
+
 Modified InhousePart.java
 line 18-19:
         public InhousePart() {
             this.minimum = 0;
             this.maximum = 100;
         }
+
 
 Modified OutsourcedPart.java
 line 18-19:
@@ -308,6 +310,7 @@ line 33-38:
                 < ul>< li th:each="err: ${#fields.allErrors()}" th:text="${err}">< /li>< /ul>
             < /div>
             < /p>
+
 
 Modified OutsourcedPartForm.html
 line 9-13:
@@ -383,9 +386,8 @@ import com.example.demo.validators.ValidPartInventoryMinimum;
 line 24-25:
 @ValidPartInventory 
 @ValidPartInventoryMinimum
-</pre>
 
-<pre>
+
 Created PartMinimumValidator.java 
 
 package com.example.demo.validators;
@@ -512,4 +514,23 @@ line 160-176:
     }
 </pre>
 
-<b>Part J:</b>
+## <b>Part J:
+Remove the class files for any unused validators in order to clean your code. </b>
+<pre>
+ValidDeletePart (DeletePartValidator)               - Used in Part.java
+    - Prevents part from being deleted if they're associated with a product 
+
+ValidEnufParts.java (EnufPartsValidator)            - Used in Product.java 
+    - Prevents adding additional parts to products if there aren't enough of them in inventory
+
+ValidPartInventory.java (PartInventoryValidator)    - Used in Part.java
+    - Prevents from part inventory to exceed maximum limit 
+
+ValidPartInventoryMinimum (PartMinimumValidator)    - Used in Part.java
+    - Prevents from part inventory to be lower than required minimum
+
+ValidProductPrice (PriceProductValidator)           - Used in Product.java
+    - Prevents the price of the product becoming less than the sum of the price of the parts
+
+All validators are being used, none were deleted. 
+</pre>
