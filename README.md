@@ -128,10 +128,10 @@ line 77-122:
 
 if (productRepository.count() == 0) {
     Product calmingPotion = new Product("Calming potion",29.99,20);
-    Product healingPotion = new Product("Healing potion",29.99,23);
-    Product energyPotion = new Product("Energy Potion",29.99,34);
-    Product protectionPotion = new Product("Protection potion",29.99,41);
-    Product clarityPotion = new Product("Clarity potion",29.99,35);
+    Product healingPotion = new Product("Healing potion",29.99,20);
+    Product energyPotion = new Product("Energy Potion",29.99,30);
+    Product protectionPotion = new Product("Protection potion",29.99,40);
+    Product clarityPotion = new Product("Clarity potion",29.99,30);
 
     productRepository.save(calmingPotion);
     productRepository.save(healingPotion);
@@ -139,6 +139,7 @@ if (productRepository.count() == 0) {
     productRepository.save(protectionPotion);
     productRepository.save(clarityPotion);
     }
+
 </pre>
 
 ## <b>Part F:
@@ -258,16 +259,6 @@ line 108-114:
             public void setMaximum(int maximum) { this.maximum = maximum; }
 
             public int getMaximum() { return this.maximum; }
-
-
-Modified Part.java
-line 47-48:
-            this.minimum = 0;
-            this.maximum = 100;
-
-line 56-57:
-            this.minimum = 0;
-            this.maximum = 100;
 
 
 Modified InhousePart.java
@@ -519,6 +510,9 @@ Remove the class files for any unused validators in order to clean your code. </
 <pre>
 ValidDeletePart (DeletePartValidator)               - Used in Part.java
     - Prevents part from being deleted if they're associated with a product 
+
+DeletePartValidator                                 - Not used
+    - Not used and redundant, deleted
 
 ValidEnufParts.java (EnufPartsValidator)            - Used in Product.java 
     - Prevents adding additional parts to products if there aren't enough of them in inventory
